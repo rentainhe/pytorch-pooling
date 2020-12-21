@@ -30,5 +30,5 @@ if __name__ == '__main__':
     print("Hyper parameters:")
     print(configs)
 
-    # if configs.run_mode == 'train':
-    #     train(configs)
+    if configs.run_mode == 'train':
+        train_engine(configs)
