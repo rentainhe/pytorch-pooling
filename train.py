@@ -4,7 +4,7 @@ from utils.train_engine import train_engine
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Pooling Survey Args')
-    parser.add_argument('--gpu', action='store_true', help="if use gpu for training")
+    parser.add_argument('--gpu', type=str, help="gpu choose, eg. '0,1,2,...' ")
     parser.add_argument('--run', type=str, dest='run_mode',choices=['train','test'])
     parser.add_argument('--batch_size', type=int, default=128, help='batch size for dataloader')
     parser.add_argument('--lr', type=float, default=0.1, help='initial learning rate')
