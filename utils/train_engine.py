@@ -22,7 +22,7 @@ def train_engine(__C):
     optimizer = optim.SGD(params=net.parameters(), lr=__C.lr, momentum=0.9, weight_decay=5e-4)
 
     # define optimizer scheduler
-    train_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60,120,160], gamma=0.2)
+    train_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=__C.milestones, gamma=__C.lr_decay_rate)
     iter_per_epoch = len(train_loader)
     warmup_schedule = WarmUpLR(optimizer, iter_per_epoch * __C.warmup_epoch)
 
