@@ -9,7 +9,7 @@ from utils.util import WarmUpLR
 from torch.utils.tensorboard import SummaryWriter
 import time
 def train_engine(__C):
-    net = vgg16_bn()
+    net = vgg16_bn(__C)
     net = net.cuda()
 
     # define dataloader

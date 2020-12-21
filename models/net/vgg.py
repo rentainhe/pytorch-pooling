@@ -59,16 +59,16 @@ def make_layers(cfg, __C, batch_norm=False):
 
     return nn.Sequential(*layers)
 
-def vgg11_bn():
-    return VGG(make_layers(cfg['A'], batch_norm=True))
+def vgg11_bn(__C):
+    return VGG(make_layers(cfg['A'], __C, batch_norm=True))
 
-def vgg13_bn():
-    return VGG(make_layers(cfg['B'], batch_norm=True))
+def vgg13_bn(__C):
+    return VGG(make_layers(cfg['B'], __C, batch_norm=True))
 
-def vgg16_bn():
-    return VGG(make_layers(cfg['D'], batch_norm=True))
+def vgg16_bn(__C):
+    return VGG(make_layers(cfg['D'], __C, batch_norm=True))
 
-def vgg19_bn():
-    return VGG(make_layers(cfg['E'], batch_norm=True))
+def vgg19_bn(__C):
+    return VGG(make_layers(cfg['E'], __C, batch_norm=True))
 
 
