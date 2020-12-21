@@ -36,7 +36,7 @@ def train_engine(__C):
     checkpoint_path = os.path.join(checkpoint_path, '{net}-{epoch}-{type}.pth')
 
     # define the log save dir
-    log_path = os.path.join(__C.result_log_dir, __C.model)
+    log_path = os.path.join(__C.result_log_dir, __C.name)
     if not os.path.exists(log_path):
         os.makedirs(log_path)
     log_path = os.path.join(log_path, __C.version + '.txt')
@@ -80,11 +80,11 @@ def train_engine(__C):
             optimizer.step()
             n_iter = (epoch-1) * len(train_loader) + step + 1
             print(
-                '[{Version}] [{Model}] Training Epoch: {epoch} [{trained_samples}/{total_samples}]\tLoss: {:0.4f}\tLR: {:0.6f}'.format(
+                '[{Version}] [{Name}] Training Epoch: {epoch} [{trained_samples}/{total_samples}]\tLoss: {:0.4f}\tLR: {:0.6f}'.format(
                     loss_tmp,
                     optimizer.param_groups[0]['lr'],
                     Version=__C.version,
-                    Model=__C.model,
+                    Name=__C.name,
                     epoch=epoch,
                     trained_samples=step * __C.batch_size + len(images),
                     total_samples=len(train_loader.dataset)
@@ -129,11 +129,11 @@ def train_engine(__C):
 
             # save model after every "save_epoch" epoches and model with the best acc
             if epoch > __C.milestones[1] and best_acc < acc:
-                torch.save(net.state_dict(), checkpoint_path.format(net=__C.model, epoch=epoch, type='best'))
+                torch.save(net.state_dict(), checkpoint_path.format(net=__C.name, epoch=epoch, type='best'))
                 best_acc = acc
                 continue
             if not epoch % __C.save_epoch:
-                torch.save(net.state_dict(), checkpoint_path.format(net=__C.model, epoch=epoch, type='regular'))
+                torch.save(net.state_dict(), checkpoint_path.format(net=__C.name, epoch=epoch, type='regular'))
 
             # print the testing information
             print('Evaluating Network.....')
