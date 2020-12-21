@@ -8,7 +8,7 @@ def get_train_loader(configs):
         transforms.ToTensor(),
         transforms.Normalize(configs.mean, configs.std)
     ])
-    trainset = datasets.CIFAR100(root=configs.data_path['cifar100'],
+    trainset = datasets.CIFAR100(root='./data/cifar100',
                                 train=True,
                                 download=True,
                                 transform=transform_train)
@@ -28,7 +28,7 @@ def get_test_loader(configs):
         transforms.ToTensor(),
         transforms.Normalize(configs.mean, configs.std)
     ])
-    testset = datasets.CIFAR100(root=configs.data_path['cifar100'],
+    testset = datasets.CIFAR100(root='./data/cifar100',
                                 train=False,
                                 download=True,
                                 transform=transform_test)
