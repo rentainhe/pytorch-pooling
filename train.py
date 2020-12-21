@@ -6,6 +6,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Pooling Survey Args')
     parser.add_argument('--gpu', type=str, help="gpu choose, eg. '0,1,2,...' ")
     parser.add_argument('--run', type=str, dest='run_mode',choices=['train','test'])
+    parser.add_argument('--name', type=str, required=True, help='the name of this training')
     parser.add_argument('--batch_size', type=int, default=128, help='batch size for dataloader')
     parser.add_argument('--lr', type=float, default=0.1, help='initial learning rate')
     parser.add_argument('--lr_decay_rate', type=float, default=0.2, help="learning rate decay rate")

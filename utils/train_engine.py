@@ -27,10 +27,10 @@ def train_engine(__C):
     warmup_schedule = WarmUpLR(optimizer, iter_per_epoch * __C.warmup_epoch)
 
     # define tensorboard writer
-    writer = SummaryWriter(log_dir=os.path.join(__C.tensorboard_log_dir,__C.model,__C.version))
+    writer = SummaryWriter(log_dir=os.path.join(__C.tensorboard_log_dir,__C.name,__C.version))
 
     # define model save dir
-    checkpoint_path = os.path.join(__C.ckpts_dir, __C.model, __C.version)
+    checkpoint_path = os.path.join(__C.ckpts_dir, __C.name, __C.version)
     if not os.path.exists(checkpoint_path):
         os.makedirs(checkpoint_path)
     checkpoint_path = os.path.join(checkpoint_path, '{net}-{epoch}-{type}.pth')
