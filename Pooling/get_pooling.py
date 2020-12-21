@@ -9,14 +9,3 @@ def get_pooling(__C):
     except ImportError:
         print('the pool method name you entered is not supported yet')
         sys.exit()
-
-class config:
-    def __init__(self):
-        self.pooling = 'max'
-        self.kernel_size = 2
-        self.stride = 2
-        self.padding = 0
-        self.dilation = 1
-
-c = config()
-max = get_pooling(c)(kernel_size=1,stride=1)

@@ -28,6 +28,8 @@ if __name__ == '__main__':
     args = parse_args()
     args_dict = configs.parse_to_dict(args)
     configs.add_args(args_dict)
+    configs.training_init()
+    configs.path_init()
 
     print("Hyper parameters:")
     print(configs)

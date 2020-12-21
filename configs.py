@@ -25,8 +25,6 @@ class Configs():
         self.ckpts_dir = 'ckpts'
         self.result_log_dir = 'log'
         self.tensorboard_log_dir = 'runs'
-        self.training_init()
-        self.path_init()
 
     def parse_to_dict(self, args):
         args_dict = {}
