@@ -18,4 +18,5 @@ class mixedPool(nn.Module):
         return x
 
 def mixed():
+    print("You are using Mixed Pooling Method")
     return mixedPool

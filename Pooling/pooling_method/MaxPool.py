@@ -14,4 +14,5 @@ class MaxPool(nn.Module):
         return x
 
 def max():
+    print("You are using Max Pooling Method")
     return MaxPool

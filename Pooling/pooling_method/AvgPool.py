@@ -14,4 +14,5 @@ class AvgPool(nn.Module):
         return x
 
 def avg():
+    print("You are using Avg Pooling Method")
     return AvgPool
