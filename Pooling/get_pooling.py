@@ -19,5 +19,4 @@ class config:
         self.dilation = 1
 
 c = config()
-max = get_pooling(c)
-max(kernel_size=1,stride=1)
+max = get_pooling(c)(kernel_size=1,stride=1)
