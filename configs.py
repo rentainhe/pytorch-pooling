@@ -20,7 +20,7 @@ class Configs():
         self.time = datetime.now().strftime('%A_%d_%B_%Y_%Hh_%Mm_%Ss')
         self.seed = random.randint(0, 9999999)
         self.version = str(self.seed)
-        self.batch_size = 64
+        self.batch_size = 128
         self.gradient_accumulation_steps = 1
         self.ckpts_dir = 'ckpts'
         self.result_log_dir = 'log'
