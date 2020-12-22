@@ -61,6 +61,9 @@ mixed pooling
 Lp pooling
 ```
 
+### 5. Add a new pooling method
+You should add a new pooling method file(.py) in `"/Pooling/pooling_method"` and update the `__init__.py` file
+
 ## Results
 The result I can get from this repo, I train every model with the same hyperparam and I don't use any tricks in this repo.
 
