@@ -60,6 +60,15 @@ average pooling
 mixed pooling
 ```
 
+## Results
+The result I can get from this repo, I train every model with the same hyperparam and I don't use any tricks in this repo.
+
+|dataset|backbone|pooling|acc|epoch(lr = 0.1)|epoch(lr = 0.02)|epoch(lr = 0.004)|epoch(lr = 0.0008)|total epoch|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:
+|cifar100|vgg16_bn|max|70.89%|60|60|40|40|200|
+|cifar100|vgg16_bn|avg|70.56%|60|60|40|40|200|
+|cifar100|vgg16_bn|mixed|71.13%|60|60|40|40|200|
+
 ## Implementated Pooling
 
 - mixed pooling [Mixed pooling for convolutional neural networks](https://rd.springer.com/chapter/10.1007/978-3-319-11740-9_34)
