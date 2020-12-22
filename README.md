@@ -58,6 +58,7 @@ The supported pooling args are
 max pooling
 average pooling
 mixed pooling
+Lp pooling
 ```
 
 ## Results
@@ -73,3 +74,5 @@ The result I can get from this repo, I train every model with the same hyperpara
 ## Implementated Pooling
 
 - mixed pooling [Mixed pooling for convolutional neural networks](https://rd.springer.com/chapter/10.1007/978-3-319-11740-9_34)
+- Lp pooling [Convolutional neural networks applied to house numbers digit
+classification](https://arxiv.org/abs/1204.3968)

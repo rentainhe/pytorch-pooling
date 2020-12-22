@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class LpPool(nn.Module):
-    def __init__(self, kernel_size, stride, padding=0,p=3):
+    def __init__(self, kernel_size, stride, padding=0, p=3):
         super(LpPool,self).__init__()
         self.kernel_size = kernel_size
         self.stride = stride
