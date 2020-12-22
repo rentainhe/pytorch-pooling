@@ -20,6 +20,7 @@ def parse_args():
                             'max',
                             'avg',
                             'mixed',
+                            'Lp',
                         ], default='max',help='choose one pooling method to use', required=True)
     args = parser.parse_args()
     return args
