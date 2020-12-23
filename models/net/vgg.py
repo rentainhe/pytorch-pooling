@@ -46,7 +46,9 @@ def make_layers(cfg, __C, batch_norm=False):
     input_channel = 3
     for l in cfg:
         if l == 'P':
-            layers += [get_pooling(__C)(kernel_size=2,stride=2)]
+            if __C.pooling == 'lip':
+                layers += [get_pooling(__C)(l)]
+            else: layers += [get_pooling(__C)(kernel_size=2,stride=2)]
             continue
 
         layers += [nn.Conv2d(input_channel, l, kernel_size=3, padding=1)]

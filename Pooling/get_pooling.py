@@ -9,3 +9,11 @@ def get_pooling(__C):
     except ImportError:
         print('the pool method name you entered is not supported yet')
         sys.exit()
+
+# class config:
+#     def __init__(self):
+#         self.pooling = 'lip'
+
+# c = config()
+# pool = get_pooling(c)
+# print(pool(128))
