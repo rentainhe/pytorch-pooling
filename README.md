@@ -59,6 +59,7 @@ max pooling
 average pooling
 mixed pooling
 Lp pooling
+lip pooling
 ```
 
 ### 5. Add a new pooling method
@@ -80,3 +81,4 @@ The result I can get from this repo, I train every model with the same hyperpara
 - mixed pooling [Mixed pooling for convolutional neural networks](https://rd.springer.com/chapter/10.1007/978-3-319-11740-9_34)
 - Lp pooling [Convolutional neural networks applied to house numbers digit
 classification](https://arxiv.org/abs/1204.3968)
+- lip pooling [LIP: Local Importance-based Pooling](https://arxiv.org/abs/1908.04156)
