@@ -87,7 +87,8 @@ class StochasticPool2d(nn.Module):
 
             # output = x
             # Pick values corresponding to h, w indices calculated
-            output = x[:, :, h_indices.cuda()][:, :, :, w_indices.cuda()]
+            # output = x[:, :, h_indices.cuda()][:, :, :, w_indices.cuda()]
+            output = x[:, :, h_indices][:, :, :, w_indices]
             # print(x.shape, output.shape)
         else:
             # If S3Pooling flag disabled and inference time, perform average pooling
