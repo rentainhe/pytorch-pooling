@@ -96,6 +96,6 @@ class StochasticPool2d(nn.Module):
 
         return output
 
-def stochatic():
+def stochastic():
     print("You are using Stochatic Pooling Method")
     return StochasticPool2d
