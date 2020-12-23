@@ -44,10 +44,12 @@ def make_layers(cfg, __C, batch_norm=False):
     layers = []
 
     input_channel = 3
-    for l in cfg:
+    for i,l in enumerate(cfg):
         if l == 'P':
+
             if __C.pooling == 'lip':
-                layers += [get_pooling(__C)(l)]
+                layers += [get_pooling(__C)(cfg(i-1))]
+
             else: layers += [get_pooling(__C)(kernel_size=2,stride=2)]
             continue
 
