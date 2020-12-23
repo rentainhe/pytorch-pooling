@@ -13,10 +13,10 @@ def get_pooling(__C):
 
 # class config:
 #     def __init__(self):
-#         self.pooling = 'lip'
+#         self.pooling = 'stochastic'
 #
 # c = config()
 # pool = get_pooling(c)
-# p = pool(128)
+# p = pool(2,2)
 # x = torch.randn(1,128,4,4)
 # print(p(x))
