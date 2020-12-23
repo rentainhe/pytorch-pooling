@@ -1,98 +1,60 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from torch.nn.modules.utils import _pair, _quadruple
 
 class StochasticPool2d(nn.Module):
-    def __init__(self, kernel_size=2, stride=2, padding=0):
+    """ Stochastic 2D pooling, where prob(selecting index)~value of the activation
+    IM_SIZE should be divisible by 2, not best implementation.
+    based off:
+    https://gist.github.com/rwightman/f2d3849281624be7c0f11c85c87c1598#file-median_pool-py-L5
+    Args:
+         kernel_size: size of pooling kernel, int or 2-tuple
+         stride: pool stride, int or 2-tuple
+         padding: pool padding, int or 4-tuple (l, r, t, b) as in pytorch F.pad
+         same: override padding and enforce same padding, boolean
+    """
+
+    def __init__(self, kernel_size=2, stride=2, padding=0, same=False):
         super(StochasticPool2d, self).__init__()
-        self.kernel_size = kernel_size
-        self.stride = stride
-        self.padding = padding
-        self.grid_size = kernel_size
+        self.kernel_size = _pair(kernel_size)  # I don't know what this is but it works
+        self.stride = _pair(stride)
+        self.padding = _quadruple(padding)  # convert to l, r, t, b
+        self.same = same
 
-        # Reference: https://arxiv.org/pdf/1611.05138.pdf
-        # First, perform with stride=1 and maintain resolution
-        # Hence, padding zeroes only on the right and bottom
-        self.padding = torch.nn.ConstantPad2d((0, 1, 0, 1), 0)
-
-    def forward(self, x, s3pool_flag=False):
-        # If S3Pool flag is enabled or training mode: Run S3Pooling
-        if s3pool_flag or self.training:
-
-            # Compute spatial dimensions from input feature map tensor
-            h, w = x.shape[-2:]
-            n_h = h // self.grid_size
-            n_w = w // self.grid_size
-            n_h = int(n_h)
-            n_w = int(n_w)
-
-            # Reference: https://arxiv.org/pdf/1611.05138.pdf
-            # First, perform with stride=1 and maintain resolution
-            # Hence, padding only on the right and bottom
-            x = self.padding(x)
-
-            # First step : perform maxpooling
-            x = F.max_pool2d(x, self.kernel_size, 1)
-
-            w_indices = []
-            h_indices = []
-
-            # Second step : Perform stochastic S3Pooling
-
-            for i in range(n_w):
-
-                # Calculate offset
-                position_offset = self.grid_size * i
-
-                # Max range for Boundary case
-                if i + 1 < n_w:
-                    max_range = self.grid_size
-                else:
-                    max_range = w - position_offset
-
-                # Pick random w index from [ position_offset to grid size ]
-                # Don't use random at inference time for exporting to IR
-                if not self.training:
-                    w_index = torch.LongTensor([0])
-                else:
-                    w_index = torch.LongTensor(1).random_(0, max_range)
-                w_indices.append(torch.add(w_index, position_offset))
-
-            for j in range(n_h):
-
-                # Calculate offset
-                position_offset = self.grid_size * j
-
-                # Max range for Boundary case
-                if j + 1 < n_h:
-                    max_range = self.grid_size
-                else:
-                    max_range = h - position_offset
-
-                # Pick random h index from [position offset to grid_size]
-                # Don't use random at inference time for exporting to IR
-                if not self.training:
-                    h_index = torch.LongTensor([0])
-                else:
-                    h_index = torch.LongTensor(1).random_(0, max_range)
-                h_indices.append(torch.add(h_index, position_offset))
-
-            # Gather all the h, w indicies from S3Pooling step
-            h_indices = torch.cat(h_indices, dim=0)
-            w_indices = torch.cat(w_indices, dim=0)
-
-            # output = x
-            # Pick values corresponding to h, w indices calculated
-            # output = x[:, :, h_indices.cuda()][:, :, :, w_indices.cuda()]
-            output = x[:, :, h_indices][:, :, :, w_indices]
-            # print(x.shape, output.shape)
+    def _padding(self, x):
+        if self.same:
+            ih, iw = x.size()[2:]
+            if ih % self.stride[0] == 0:
+                ph = max(self.k[0] - self.stride[0], 0)
+            else:
+                ph = max(self.k[0] - (ih % self.stride[0]), 0)
+            if iw % self.stride[1] == 0:
+                pw = max(self.k[1] - self.stride[1], 0)
+            else:
+                pw = max(self.k[1] - (iw % self.stride[1]), 0)
+            pl = pw // 2
+            pr = pw - pl
+            pt = ph // 2
+            pb = ph - pt
+            padding = (pl, pr, pt, pb)
         else:
-            # If S3Pooling flag disabled and inference time, perform average pooling
-            # Use AvgPooling
-            output = F.avg_pool2d(x, self.kernel_size, self.stride)
+            padding = self.padding
+        return padding
 
-        return output
+    def forward(self, x):
+        # because multinomial likes to fail on GPU when all values are equal
+        # Try randomly sampling without calling the get_random function a million times
+        init_size = x.shape
+
+        # x = F.pad(x, self._padding(x), mode='reflect')
+        x = x.unfold(2, self.kernel_size[0], self.stride[0]).unfold(3, self.kernel_size[1], self.stride[1])
+        x = x.contiguous().view(-1, 4)
+        idx = torch.randint(0, x.shape[1], size=(x.shape[0],)).type(torch.cuda.LongTensor)
+        x = x.contiguous().view(-1)
+        x = torch.take(x, idx)
+        x = x.contiguous().view(init_size[0], init_size[1], int(init_size[2] / 2), int(init_size[3] / 2))
+        return x
 
 def stochastic():
     print("You are using Stochatic Pooling Method")
