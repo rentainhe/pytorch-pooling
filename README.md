@@ -63,7 +63,10 @@ lip pooling
 ```
 
 ### 5. Add a new pooling method
-You should add a new pooling method file(.py) in `"/Pooling/pooling_method"` and update the `__init__.py` file
+You should add a new pooling method `pool.py` in `"/Pooling/pooling_method"` and update the `__init__.py` file
+
+### 6. Addition
+- lip pooling: the backbone in original paper is `ResNet`, But I use `VggNet` in this repo, so there might be something wrong with the accuracy
 
 ## Results
 The result I can get from this repo, I train every model with the same hyperparam and I don't use any tricks in this repo.
