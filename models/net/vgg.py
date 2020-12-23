@@ -48,7 +48,7 @@ def make_layers(cfg, __C, batch_norm=False):
         if l == 'P':
 
             if __C.pooling == 'lip':
-                layers += [get_pooling(__C)(cfg(i-1))]
+                layers += [get_pooling(__C)(cfg[i-1])]
 
             else: layers += [get_pooling(__C)(kernel_size=2,stride=2)]
             continue
