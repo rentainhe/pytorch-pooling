@@ -1,5 +1,5 @@
-# Pooling_Survey
-This is a survey about different pooling methods used in `image classification`
+# Pooling
+This is a collection of different pooling methods used in `image classification` `segmentation` `detection`
 
 ## Features
 * Multi-GPU support
