@@ -1,5 +1,5 @@
-# Pooling_Survey
-This is a survey about different pooling methods used in `image classification`
+# Pooling
+This is a collection of different pooling methods used in `image classification` `segmentation` `detection`
 
 ## Features
 * Multi-GPU support
@@ -14,11 +14,11 @@ This is a survey about different pooling methods used in `image classification`
 ## Installation
 * clone
   ```
-  git clone https://github.com/rentainhe/Pooling_Survey.git
+  git clone https://github.com/rentainhe/pooling.git
   ```
 * make data directory for cifar100
   ```bash
-  $ cd Pooling_Survey
+  $ cd pooling
   $ mkdir data
   ```
  
@@ -26,7 +26,7 @@ This is a survey about different pooling methods used in `image classification`
 
 ### 1. enter directory
 ```bash
-$ cd Pooling_Survey
+$ cd pooling
 ```
 
 ### 2. dataset
