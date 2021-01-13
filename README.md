@@ -14,11 +14,11 @@ This is a collection of different pooling methods used in `image classification`
 ## Installation
 * clone
   ```
-  git clone https://github.com/rentainhe/pooling.git
+  git clone https://github.com/rentainhe/pytorch-pooling.git
   ```
 * make data directory for cifar100
   ```bash
-  $ cd pooling
+  $ cd pytorch-pooling
   $ mkdir data
   ```
  
@@ -26,7 +26,7 @@ This is a collection of different pooling methods used in `image classification`
 
 ### 1. enter directory
 ```bash
-$ cd pooling
+$ cd pytorch-pooling
 ```
 
 ### 2. dataset
