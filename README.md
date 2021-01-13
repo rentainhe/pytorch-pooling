@@ -60,6 +60,7 @@ average pooling
 mixed pooling
 Lp pooling
 lip pooling
+soft pooling
 ```
 
 ### 5. Add a new pooling method
@@ -86,3 +87,4 @@ The result I can get from this repo, I train every model with the same hyperpara
 - Lp pooling [Convolutional neural networks applied to house numbers digit
 classification](https://arxiv.org/abs/1204.3968)
 - lip pooling [LIP: Local Importance-based Pooling](https://arxiv.org/abs/1908.04156)
+- soft pooling [Refining activation downsampling with SoftPool](https://arxiv.org/abs/2101.00440)
