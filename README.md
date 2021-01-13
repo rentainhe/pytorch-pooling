@@ -53,6 +53,8 @@ $ python3 train.py --run train --name test --pooling max
 
 - ```--pooling=str```, e.g, `--pooling='max'` to set the __pooling method__ in `vgg16` to be `max_pool2d`
 
+- ```--gpu=str```, e.g, `--gpu='1'` to set the specified GPU for training
+
 The supported pooling args are
 ```
 max pooling
