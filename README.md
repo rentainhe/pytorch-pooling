@@ -82,6 +82,7 @@ The result I can get from this repo, I train every model with the same hyperpara
 |cifar100|vgg16_bn|Lp(p=2)|70.65%|60|60|40|40|200|
 |cifar100|vgg16_bn|Lp(p=3)|70.67%|60|60|40|40|200|
 |cifar100|vgg16_bn|lip|71.23%|60|60|40|40|200|
+|cifar100|vgg16_bn|softpool|__71.39%__|60|60|40|40|200|
 
 ## Implementated Pooling
 

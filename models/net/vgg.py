@@ -10,6 +10,7 @@ import torch
 import torch.nn as nn
 from Pooling.get_pooling import get_pooling
 
+
 cfg = {
     'A' : [64,     'P', 128,      'P', 256, 256,           'P', 512, 512,           'P', 512, 512,           'P'],
     'B' : [64, 64, 'P', 128, 128, 'P', 256, 256,           'P', 512, 512,           'P', 512, 512,           'P'],
@@ -74,5 +75,17 @@ def vgg16_bn(__C):
 
 def vgg19_bn(__C):
     return VGG(make_layers(cfg['E'], __C, batch_norm=True))
+
+def vgg11(__C):
+    return VGG(make_layers(cfg['A'], __C, batch_norm=False))
+
+def vgg13(__C):
+    return VGG(make_layers(cfg['B'], __C, batch_norm=False))
+
+def vgg16(__C):
+    return VGG(make_layers(cfg['D'], __C, batch_norm=False))
+
+def vgg19(__C):
+    return VGG(make_layers(cfg['E'], __C, batch_norm=False))
 
 

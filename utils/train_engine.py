@@ -1,4 +1,5 @@
 from models.net.vgg import vgg16_bn
+from models.net.vgg import vgg16
 from dataset_loader import get_train_loader
 from dataset_loader import get_test_loader
 import os
@@ -9,6 +10,7 @@ from utils.util import WarmUpLR
 from torch.utils.tensorboard import SummaryWriter
 import time
 def train_engine(__C):
+
     net = vgg16_bn(__C)
     net = net.cuda()
 
